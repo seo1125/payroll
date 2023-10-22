@@ -19,7 +19,7 @@ class PayMasterList{
 	String p_date_out;
 	
 	void printPayMaster() {
-		System.out.printf("%3d %s %s %s %s %s %s %d %4s %s %s \n", cnt, p_id, p_name, p_jumin1, p_jumin2,p_department, 
+		System.out.printf("%3d %s %s %s %s %s %2s %3d %2s %3s %3s \n", cnt, p_id, p_name, p_jumin1, p_jumin2,p_department, 
 				p_grade, p_ho, p_status, p_date_in, p_date_out);
 	}
 }
@@ -48,7 +48,7 @@ public class Pay_Master_list {
 				} else if(in_order == 1){
 					sql = sql + " order by id";
 				} else if(in_order > 1000 && in_order < 9999) {
-					sql = sql + "where department=" + in_order;
+					sql = sql + " where department=" + in_order;
 				} else if(in_order > 170000 && in_order < 999999) {
 					sql = sql + " where id=" + in_order;
 				}
@@ -58,9 +58,9 @@ public class Pay_Master_list {
 				PayMasterList p = new PayMasterList();
 				int i_cnt = 0;
 				
-				System.out.println("===========================인사 마스터===========================");
-				System.out.println("번호 사원번호 성명 주민등록번호   소속 직급 호봉 상태 입사일자 ");
-				System.out.println("===============================================================");
+				System.out.println("===========================인사 마스터================================");
+				System.out.println("번호 사원번호  성명     주민등록번호   소속 직급 호봉 상태 입사일자     퇴사일자");
+				System.out.println("====================================================================");
 				
 				while(rs.next()) {
 					p.p_id = rs.getString("id");
@@ -76,10 +76,8 @@ public class Pay_Master_list {
 					p.cnt = ++i_cnt;
 					p.printPayMaster();
 				}
-				System.out.println("=================================================================");
-				rs.close();
-				pstmt.close();
-				conn.close();
+				System.out.println("====================================================================");
+				
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
